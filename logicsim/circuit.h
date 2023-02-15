@@ -22,6 +22,8 @@ class Circuit
 		uint64_t m_current_time;
     std::vector<Gate*> m_gates;
     std::vector<Wire*> m_wires;
+		//adding m_pq data member which is meanheap with Event* and EventLess as comparator
+		Heap<Event*, EventLess> m_pq;
 		// we need to add the m_pq data member. It should be a min-heap of Event*;
         
 };

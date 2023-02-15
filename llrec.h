@@ -77,13 +77,44 @@ Node* llfilter(Node* head, Comp pred);
 // implement the above function now.
 //*****************************************************************************
 
+
+//using head recursion
+//recurse FIRST!!!
+//each iteration will either return itself OR the next valid item
 template <typename Comp>
 Node* llfilter(Node* head, Comp pred)
 {
     //*********************************************
     // Provide your implementation below
     //*********************************************
+    //checks for empty list
+    //base case when end of list is reached
+    if (head == NULL) {
+        return NULL;
+    }
 
+    //in both cases below, we return after recursing (as we must do in head recursion)
+    
+    //check if current item should stay in list
+    if(!pred(head -> val)) {
+        Node* continuing_address = head -> next;
+        //continue the function call for rest of list, skipping current object
+        head -> next = llfilter(continuing_address, pred);
+        //return current item since it remains in list
+        return head;
+    }
+        
+    //code to execute if current item shouldn't stay in list
+    else {
+        //create variable to hold address of the next item in list
+        Node* return_address = head -> next;
+        //continue the recursive function call on rest of list, skipping current object
+        Node* next_func_call = llfilter(return_address, pred);
+        //delete current head
+        delete head;
+        //return address from function call (will be next item that remains in list)
+        return next_func_call; 
+    }
 
 }
 
