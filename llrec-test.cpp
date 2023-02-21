@@ -67,8 +67,8 @@ void dealloc(Node* head)
 //   function object struct declarations
 // -----------------------------------------------
 
-
-
+struct isEven { bool operator()(int x) { return x % 2 == 0; } };
+struct isOdd { bool operator()(int x) { return x % 2 != 0; } };
 
 
 int main(int argc, char* argv[])
@@ -82,12 +82,25 @@ int main(int argc, char* argv[])
     // Feel free to update any code below this point
     // -----------------------------------------------
     Node* head = readList(argv[1]);
+    Node* smaller = NULL;
+    Node* larger = NULL;
+    cout << "Original list: ";
+    print(head);
+    //isEven c1;
+    //isOdd c2;
+
+    int pivot = 5;
+    llpivot(head, smaller, larger, 1);
+    cout << "Smaller than " << pivot << ": " << endl;
+    print(smaller);
+    cout << "Larger than " << pivot << ": " << endl;
+    print(larger);
     cout << "Original list: ";
     print(head);
 
+    /*Node* functor_list = llfilter(head, c2);
+    print(functor_list);*/
     // Test out your linked list code
-
-
 
     
     return 0;
